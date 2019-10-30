@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/hexgrid/hextileset.gd" type="Script" id=1]
+[ext_resource path="res://addons/hexgrid/hextileset.png" type="Texture" id=2]
+[ext_resource path="res://assets/UI/fog_01.png" type="Texture" id=3]
+[ext_resource path="res://addons/hexgrid/hextile.gd" type="Script" id=4]
+[ext_resource path="res://addons/hexgrid/hextile.png" type="Texture" id=5]
+
+[node name="HexTileSet" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+SIZE = Vector2( 120, 140 )
+C = 35
+
+[node name="HexTile" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+centered = false
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_icon": ExtResource( 5 )
+}
+AUTO_NAVIGATION = false
+AUTO_COLLISION = false
