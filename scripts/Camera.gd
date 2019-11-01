@@ -11,8 +11,6 @@ const MAX_SPEED : float = 2000.0
 const BASE_SPEED : float = 300.0
 const ACCELERATION : float = 15.0
 
-const INITIAL_POSITION = Vector2(1366/2, 768/2)
-
 var current_acceleration : float = BASE_SPEED
 
 onready var viewport_rect = get_viewport().get_visible_rect()
@@ -60,12 +58,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 		
 func _process(delta):
-	if Input.is_action_pressed("ui_space"):
-		offset = Vector2(0, 0)
-		position = INITIAL_POSITION
-		zoom = Vector2(1.0, 1.0)
-	else:
-		handle_drag(delta)
+	handle_drag(delta)
 		
 func _input(event):
 	handle_zoom(event)

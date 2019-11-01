@@ -5,9 +5,17 @@ onready var TerrainMap = $TerrainTileMap
 onready var FogMap = $FogTileMap
 onready var ObjectMap = $ObjectMap
 
-const VillageObject = preload("res://objects/Village.tscn")
+#const VillageObject = preload("res://objects/Village.tscn")
+const CampfireObject = preload("res://objects/Campfire.tscn")
+const WoodObject = preload("res://objects/Wood.tscn")
 
 var objectMap = {}
+
+enum Terrain {
+	Grass = 0
+	Ocean = 1
+	Forest = 2
+}
 
 func _ready():
 	
@@ -17,14 +25,19 @@ func _ready():
 			FogMap.set_cell(x, y, 0)
 	
 	# Adds the initial village at (0, 0) coordinates
-	add_object(Vector2(0, 0), VillageObject.instance())
+	add_object(Vector2(0, 0), CampfireObject.instance())
 	
 	# Reveals the area around the village
 	for coordinate in objectMap.keys():
 		for object in objectMap[coordinate]:
-			if object.TYPE == 'Village':
-				for tile in FogMap.get_circle(coordinate, 3):
+			if object.TYPE == 'Campfire':
+				for tile in FogMap.get_circle(coordinate, 5):
 					FogMap.set_cellv(tile, -1)
+		
+	print(TerrainMap.get_used_cells_by_id(1))
+					
+	for coordinate in TerrainMap.get_used_cells_by_id(Terrain.Forest):
+		add_object(coordinate, WoodObject.instance())
 
 func _process(delta):
 	var hovered_cell = TerrainMap.world_to_map(get_global_mouse_position())
