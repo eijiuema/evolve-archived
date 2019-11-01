@@ -1,19 +1,29 @@
+<<<<<<< HEAD
 [gd_resource type="TileSet" load_steps=6 format=2]
 
 [ext_resource path="res://assets/Terrain/Grass/grass_05.png" type="Texture" id=1]
 [ext_resource path="res://assets/Terrain/Water/ocean_01.png" type="Texture" id=2]
 [ext_resource path="res://assets/Terrain/Grass/grass_10.png" type="Texture" id=3]
+=======
+[gd_resource type="TileSet" load_steps=4 format=2]
+
+[ext_resource path="res://assets/Terrain/Grass/grass_05.png" type="Texture" id=1]
+[ext_resource path="res://assets/Terrain/Water/ocean_02.png" type="Texture" id=2]
+>>>>>>> e4dd04369223d1cd950f40416b6ed4fe51b78ca2
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, 35, 60, 0, 120, 35, 120, 104, 60, 139, 0, 104 )
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
 outlines = [ PoolVector2Array( 0, 35, 60, 0, 120, 35, 120, 104, 60, 139, 0, 104 ) ]
 
+<<<<<<< HEAD
 [sub_resource type="NavigationPolygon" id=2]
 vertices = PoolVector2Array( 0, 35, 60, 0, 120, 35, 120, 104, 60, 139, 0, 104 )
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
 outlines = [ PoolVector2Array( 0, 35, 60, 0, 120, 35, 120, 104, 60, 139, 0, 104 ) ]
 
+=======
+>>>>>>> e4dd04369223d1cd950f40416b6ed4fe51b78ca2
 [resource]
 0/name = "0_Grass"
 0/texture = ExtResource( 1 )
