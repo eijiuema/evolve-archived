@@ -1,20 +1,19 @@
 extends Node2D
 
-onready var Highlight = Global.UI.get_node("TileHighlight")
+onready var Highlight = $Highlight
 onready var TerrainMap = $TerrainTileMap
 onready var FogMap = $FogTileMap
 onready var ObjectMap = $ObjectMap
 
-#const VillageObject = preload("res://objects/Village.tscn")
 const CampfireObject = preload("res://objects/Campfire.tscn")
 const WoodObject = preload("res://objects/Wood.tscn")
 
 var objectMap = {}
 
 enum Terrain {
-	Grass = 0
-	Ocean = 1
-	Forest = 2
+	Grass,
+	Forest,
+	Ocean
 }
 
 func _ready():
@@ -33,8 +32,6 @@ func _ready():
 			if object.TYPE == 'Campfire':
 				for tile in FogMap.get_circle(coordinate, 5):
 					FogMap.set_cellv(tile, -1)
-		
-	print(TerrainMap.get_used_cells_by_id(1))
 					
 	for coordinate in TerrainMap.get_used_cells_by_id(Terrain.Forest):
 		add_object(coordinate, WoodObject.instance())
@@ -48,7 +45,7 @@ func _process(delta):
 		Highlight.visible = false
 		
 	var tile_info = get_tile(hovered_cell)
-	Global.UI.get_node("CanvasLayer/TileHoverInfo").text = "Position: " + str(hovered_cell) + "\nTerrain: " + str(tile_info['terrain']) + "\nObjects: " + str(tile_info['objects'])
+#	Global.UI.get_node("CanvasLayer/VBoxContainer/TileHoverInfo").text = "Position: " + str(hovered_cell) + "\nTerrain: " + str(tile_info['terrain']) + "\nObjects: " + str(tile_info['objects'])
 
 func add_object(position, object):
 	if (objectMap.has(position)):

@@ -43,9 +43,9 @@ func handle_zoom(event):
 	if !SHOULD_ZOOM:
 		return
 	
-	if event.is_action_pressed("ui_zoom_in"):
+	if event.is_action_pressed("ui_zoom_out"):
 		zoom *= ZOOM_STEP
-	elif event.is_action_pressed("ui_zoom_out"):
+	elif event.is_action_pressed("ui_zoom_in"):
 		zoom /= ZOOM_STEP
 		
 	if zoom.x > ZOOM_MAX:
@@ -58,7 +58,20 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 		
 func _process(delta):
-	handle_drag(delta)
+#	handle_drag(delta)
+	pass
 		
 func _input(event):
 	handle_zoom(event)
+	
+var mouse_captured = false
+
+func _unhandled_input(event):
+
+	if event.is_action_pressed("ui_left_click"):
+		mouse_captured = true
+	elif event.is_action_released("ui_left_click"):
+		mouse_captured = false
+
+	if mouse_captured && event is InputEventMouseMotion:
+		position -= event.relative * zoom
