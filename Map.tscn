@@ -41,5 +41,10 @@ __meta__ = {
 TILE_SIZE = Vector2( 120, 140 )
 TILE_C = 35
 
-[node name="Highlight" type="Sprite" parent="."]
+[node name="Hovered" type="Sprite" parent="."]
+texture = ExtResource( 6 )
+
+[node name="Selected" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 0.74902, 0.74902, 1 )
 texture = ExtResource( 6 )

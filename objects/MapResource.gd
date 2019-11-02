@@ -8,8 +8,8 @@ enum TYPES {
 	Food
 }
 
-export (TYPES) var TYPE
-export var QUANTITY : int
+export (TYPES) var type
+export var quantity : int
 
 var available : int
 

@@ -1,3 +1,3 @@
 extends Node2D
 
-export var TYPE = ""
+export var type = ""

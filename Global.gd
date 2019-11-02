@@ -1,4 +1,4 @@
 extends Node2D
 
-onready var UI = $"/root/Game/UI"
+onready var GUI = $"/root/Game/GUI"
 onready var Map = $"/root/Game/Map"
