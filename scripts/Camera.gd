@@ -6,6 +6,15 @@ const ZOOM_STEP : float = 1.0
 
 var mouse_captured = false
 
+func handle_drag(event):
+	if event.is_action_pressed("ui_left_click"):
+		mouse_captured = true
+	elif event.is_action_released("ui_left_click"):
+		mouse_captured = false
+
+	if mouse_captured && event is InputEventMouseMotion:
+		position -= event.relative * zoom
+
 func handle_zoom(event):
 	if event.is_action_pressed("ui_zoom_out"):
 		zoom += Vector2(1, 1) * ZOOM_STEP
@@ -19,19 +28,8 @@ func handle_zoom(event):
 		zoom = Vector2(1, 1) * ZOOM_MIN
 		
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-		
-func _process(delta):
-	pass
-		
-func _input(event):
-	handle_zoom(event)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)		
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_left_click"):
-		mouse_captured = true
-	elif event.is_action_released("ui_left_click"):
-		mouse_captured = false
-
-	if mouse_captured && event is InputEventMouseMotion:
-		position -= event.relative * zoom
+	handle_drag(event)
+	handle_zoom(event)

@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://addons/hexgrid/hextileset.gd" type="Script" id=1]
+[ext_resource path="res://addons/hexgrid/hextileset.png" type="Texture" id=2]
+[ext_resource path="res://assets/Minimap/grass.png" type="Texture" id=3]
+[ext_resource path="res://addons/hexgrid/hextile.gd" type="Script" id=4]
+[ext_resource path="res://addons/hexgrid/hextile.png" type="Texture" id=5]
+[ext_resource path="res://assets/Minimap/ocean.png" type="Texture" id=6]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 0, 2, 3, 0, 6, 2, 6, 4, 3, 6, 0, 4 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
+outlines = [ PoolVector2Array( 0, 2, 3, 0, 6, 2, 6, 4, 3, 6, 0, 4 ) ]
+
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( 0, 2, 3, 0, 6, 2, 6, 4, 3, 6, 0, 4 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
+outlines = [ PoolVector2Array( 0, 2, 3, 0, 6, 2, 6, 4, 3, 6, 0, 4 ) ]
+
+[node name="HexTileSet" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+SIZE = Vector2( 6, 7 )
+C = 2
+
+[node name="Grass" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+centered = false
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_icon": ExtResource( 5 )
+}
+AUTO_NAVIGATION = true
+AUTO_COLLISION = false
+
+[node name="AutoNavigation" type="NavigationPolygonInstance" parent="Grass"]
+navpoly = SubResource( 1 )
+
+[node name="Forest" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+centered = false
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_icon": ExtResource( 5 )
+}
+AUTO_NAVIGATION = true
+AUTO_COLLISION = false
+
+[node name="AutoNavigation" type="NavigationPolygonInstance" parent="Forest"]
+navpoly = SubResource( 2 )
+
+[node name="Ocean" type="Sprite" parent="."]
+texture = ExtResource( 6 )
+centered = false
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_icon": ExtResource( 5 )
+}
+AUTO_NAVIGATION = false
+AUTO_COLLISION = true
+
+[node name="AutoCollision" type="StaticBody2D" parent="Ocean"]
