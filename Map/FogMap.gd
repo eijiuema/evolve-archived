@@ -5,8 +5,8 @@ onready var TileMap = $HexTileMap
 var seen_matrix = {}
 
 func _ready():
-	for x in range(-25, 25):
-		for y in range(-25, 25):
+	for x in range(-14, 13):
+		for y in range(-11, 12):
 			TileMap.set_cell(x, y, 1)
 
 func seen(coordinates):
@@ -29,8 +29,10 @@ func unseen(coordinates):
 
 func fog_value(coordinate):
 	return seen_matrix[coordinate] if seen_matrix.has(coordinate) else 0
-		
-				
+	
+func visible(coordinate):
+	return fog_value(coordinate) > 0
+	
 func update():
 	for tile in TileMap.get_used_cells():
 		if fog_value(tile) == 0:

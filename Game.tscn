@@ -10,7 +10,7 @@
 
 [node name="GUI" parent="." instance=ExtResource( 2 )]
 
-[node name="Camera2D" type="Camera2D" parent="GUI"]
+[node name="Camera2D" type="Camera2D" parent="."]
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
