@@ -6,7 +6,7 @@
 [ext_resource path="res://addons/hexgrid/hextile.gd" type="Script" id=4]
 [ext_resource path="res://addons/hexgrid/hextile.png" type="Texture" id=5]
 [ext_resource path="res://assets/Terrain/Grass/grass_10.png" type="Texture" id=6]
-[ext_resource path="res://assets/Terrain/Water/ocean_02.png" type="Texture" id=7]
+[ext_resource path="res://assets/Terrain/Water/deep_ocean_01.png" type="Texture" id=7]
 [ext_resource path="res://assets/Terrain/Stone/stone_07.png" type="Texture" id=8]
 
 [sub_resource type="NavigationPolygon" id=1]
@@ -31,7 +31,6 @@ __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
 AUTO_NAVIGATION = true
-AUTO_COLLISION = false
 
 [node name="AutoNavigation" type="NavigationPolygonInstance" parent="Grass"]
 navpoly = SubResource( 1 )
@@ -45,7 +44,6 @@ __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
 AUTO_NAVIGATION = true
-AUTO_COLLISION = false
 
 [node name="AutoNavigation" type="NavigationPolygonInstance" parent="Forest"]
 navpoly = SubResource( 1 )
@@ -58,7 +56,6 @@ script = ExtResource( 4 )
 __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
-AUTO_NAVIGATION = false
 AUTO_COLLISION = true
 
 [node name="AutoCollision" type="StaticBody2D" parent="Ocean"]
@@ -71,7 +68,7 @@ __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
 AUTO_NAVIGATION = true
-AUTO_COLLISION = false
 
 [node name="AutoNavigation" type="NavigationPolygonInstance" parent="Stone"]
+position = Vector2( -1.02667, -0.513344 )
 navpoly = SubResource( 1 )
