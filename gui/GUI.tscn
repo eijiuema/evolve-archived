@@ -110,7 +110,6 @@ margin_bottom = 218.0
 icon = ExtResource( 5 )
 
 [node name="BottomRight" type="MarginContainer" parent="Control"]
-editor/display_folded = true
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -143,6 +142,7 @@ rect_clip_content = true
 
 [node name="Terrain" parent="Control/BottomRight/VBoxContainer/Panel" instance=ExtResource( 6 )]
 editor/display_folded = true
+visible = false
 position = Vector2( 150, 92 )
 scale = Vector2( 2.2, 2.2 )
 
