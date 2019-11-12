@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ocean_02.png-05785689ab16ed64d7dbc8866ea3a2e6.stex"
+path="res://.import/semishallow_ocean_01.png-b0489b4676b9712eb16afd219e11924e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Terrain/Water/ocean_02.png"
-dest_files=[ "res://.import/ocean_02.png-05785689ab16ed64d7dbc8866ea3a2e6.stex" ]
+source_file="res://assets/Terrain/Water/semishallow_ocean_01.png"
+dest_files=[ "res://.import/semishallow_ocean_01.png-b0489b4676b9712eb16afd219e11924e.stex" ]
 
 [params]
 
