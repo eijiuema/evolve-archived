@@ -4,9 +4,11 @@ onready var TileMap = $HexTileMap
 
 var seen_matrix = {}
 
+export (int) var size
+
 func _ready():
-	for x in range(-14, 13):
-		for y in range(-11, 12):
+	for x in range(-size, size):
+		for y in range(-size, size):
 			TileMap.set_cell(x, y, 1)
 
 func seen(coordinates):
@@ -18,6 +20,9 @@ func seen(coordinates):
 				seen_matrix[coordinate] = 1
 	else:
 		seen([coordinates])
+		
+func seen_circle(center, radius = 1):
+	seen(TileMap.get_circle(center, radius))
 
 func unseen(coordinates):
 	if coordinates is Array:

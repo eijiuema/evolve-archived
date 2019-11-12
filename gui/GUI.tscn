@@ -1,0 +1,164 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://resources/Theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/Objects/logPile.png" type="Texture" id=2]
+[ext_resource path="res://assets/UI/icons/build.png" type="Texture" id=3]
+[ext_resource path="res://assets/UI/icons/upgrade.png" type="Texture" id=4]
+[ext_resource path="res://assets/UI/icons/demolish.png" type="Texture" id=5]
+[ext_resource path="res://map/TerrainMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://resources/MinimapTileSet.tres" type="TileSet" id=7]
+[ext_resource path="res://gui/BuildOptions.tscn" type="PackedScene" id=8]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends HBoxContainer
+
+func _ready():
+	Global.connect(\"resources_update\", self, \"_on_Resources_update\")
+	Global.Resources = Global.Resources
+
+func _on_Resources_update(resources):
+	$Wood/Stored.text = str(resources.Wood.stored)
+	$Wood/Income.text = \"+(\" + str(resources.Wood.income) + \")\""
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends RichTextLabel
+
+onready var Map = Global.Map
+
+func _ready():
+	Map.connect(\"hover\", self, \"_on_Map_hover\")
+
+func _on_Map_hover(position):
+	var tile_info = Map.get_tile_info(position)
+	text = \\
+		\"Coordinate: \" + str(tile_info['coordinate']) + \"\\n\" \\
+	+	\"Terrain: \" + str(tile_info['terrain']) + \"\\n\" \\
+	+	\"Building: \" + str(tile_info['building']) + \"\\n\" \\
+	+	\"Objects: \" + str(tile_info['objects'])
+	"
+
+[node name="GUI" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 1 )
+
+[node name="TopLeft" type="MarginContainer" parent="Control"]
+margin_right = 53.0
+margin_bottom = 40.0
+
+[node name="Resources" type="HBoxContainer" parent="Control/TopLeft"]
+margin_right = 101.0
+margin_bottom = 40.0
+script = SubResource( 1 )
+
+[node name="Wood" type="HBoxContainer" parent="Control/TopLeft/Resources"]
+margin_right = 101.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/TopLeft/Resources/Wood"]
+margin_right = 36.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+
+[node name="Stored" type="Label" parent="Control/TopLeft/Resources/Wood"]
+margin_left = 40.0
+margin_top = 8.0
+margin_right = 55.0
+margin_bottom = 32.0
+text = "25"
+
+[node name="Income" type="Label" parent="Control/TopLeft/Resources/Wood"]
+margin_left = 59.0
+margin_top = 8.0
+margin_right = 101.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 0, 1, 0.0627451, 1 )
+text = "(+25)"
+
+[node name="ActionsMenu" type="MarginContainer" parent="Control"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -109.0
+margin_right = 76.0
+margin_bottom = 109.0
+
+[node name="ActionsMenu" type="VBoxContainer" parent="Control/ActionsMenu"]
+margin_right = 76.0
+margin_bottom = 218.0
+
+[node name="Build" type="Button" parent="Control/ActionsMenu/ActionsMenu"]
+margin_right = 76.0
+margin_bottom = 70.0
+focus_neighbour_right = NodePath("../Node2D/ScrollContainer/VBoxContainer/TextureButton")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource( 3 )
+
+[node name="Upgrade" type="Button" parent="Control/ActionsMenu/ActionsMenu"]
+margin_top = 74.0
+margin_right = 76.0
+margin_bottom = 144.0
+icon = ExtResource( 4 )
+
+[node name="Demolish" type="Button" parent="Control/ActionsMenu/ActionsMenu"]
+margin_top = 148.0
+margin_right = 76.0
+margin_bottom = 218.0
+icon = ExtResource( 5 )
+
+[node name="BottomRight" type="MarginContainer" parent="Control"]
+editor/display_folded = true
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -300.0
+margin_top = -300.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/BottomRight"]
+margin_right = 300.0
+margin_bottom = 300.0
+
+[node name="TileInfo" type="RichTextLabel" parent="Control/BottomRight/VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 96 )
+size_flags_horizontal = 3
+text = "Coordinate:
+Terrain:
+Building:
+Objects:"
+scroll_active = false
+script = SubResource( 2 )
+
+[node name="Panel" type="Panel" parent="Control/BottomRight/VBoxContainer"]
+margin_top = 100.0
+margin_right = 300.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 300, 200 )
+rect_clip_content = true
+
+[node name="Terrain" parent="Control/BottomRight/VBoxContainer/Panel" instance=ExtResource( 6 )]
+editor/display_folded = true
+position = Vector2( 150, 92 )
+scale = Vector2( 2.2, 2.2 )
+
+[node name="TileMap" parent="Control/BottomRight/VBoxContainer/Panel/Terrain" index="0"]
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 6, 4 )
+TILE_SIZE = Vector2( 6, 7 )
+TILE_C = 2
+
+[node name="Label" type="Label" parent="Control/BottomRight/VBoxContainer/Panel"]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Minimap "
+
+[node name="Popup" parent="." instance=ExtResource( 8 )]
+[connection signal="pressed" from="Control/ActionsMenu/ActionsMenu/Build" to="Popup" method="_on_Build_pressed"]
+
+[editable path="Control/BottomRight/VBoxContainer/Panel/Terrain"]

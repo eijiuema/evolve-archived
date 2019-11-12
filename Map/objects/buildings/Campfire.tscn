@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/Objects/campFire.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://map/objects/buildings/MapBuilding.gd\"
+
+onready var Map = Global.Map
+
+func can_build(position):
+	return \\
+		Map.TerrainMap.get_terrain(position) == Map.TerrainMap.Terrain.Grass and\\
+		Global.Resources.Wood.stored >= 15
+	
+func build():
+	Global.Resources.Wood.stored -= 15
+	Global.Resources.Wood.income += 1.5
+	
+func destroy():
+	Global.Resources.Wood.income -= 1.5"
+
+[node name="Campfire" type="Node2D"]
+script = SubResource( 1 )
+type = "Campfire"
+fog = 3
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )

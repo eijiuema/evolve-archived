@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://map/Map.gd" type="Script" id=1]
+[ext_resource path="res://map/TerrainMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://map/ObjectMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://map/FogMap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/UI/selected_01.png" type="Texture" id=5]
+
+[node name="Map" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TerrainMap" parent="." instance=ExtResource( 2 )]
+size = 25
+
+[node name="ObjectMap" parent="." instance=ExtResource( 3 )]
+
+[node name="FogMap" parent="." instance=ExtResource( 4 )]
+size = 25
+
+[node name="Selected" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 0.74902, 0.74902, 1 )
+texture = ExtResource( 5 )
+
+[node name="Hovered" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 5 )

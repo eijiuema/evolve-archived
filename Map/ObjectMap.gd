@@ -1,13 +1,9 @@
 extends Node2D
 
-const Objects = {
-	Wood = preload("res://objects/Wood.tscn")
-}
-
 var objects = {}
 var buildings = {}
 
-onready var Map = get_parent()
+onready var Map = Global.Map
 
 func set_building(position, building = null):
 	if (buildings.has(position)):
@@ -20,7 +16,7 @@ func set_building(position, building = null):
 		add_child(building)
 		
 func get_building(position):
-	return buildings[position] if buildings.has(position) else false
+	return buildings[position] if buildings.has(position) else null
 	
 func get_coordinates_with_building(building):
 	var coordinates = []

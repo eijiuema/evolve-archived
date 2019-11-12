@@ -33,4 +33,6 @@ __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
 AUTO_NAVIGATION = false
-AUTO_COLLISION = false
+AUTO_COLLISION = true
+
+[node name="AutoCollision" type="StaticBody2D" parent="Fog"]
