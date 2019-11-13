@@ -27,20 +27,18 @@ func _ready():
 func _unhandled_input(event: InputEvent) -> void:
 	
 	self.hovered = TerrainMap.TileMap.world_to_map(get_global_mouse_position())
-#
-#	if Input.is_action_just_released("ui_left_click") and FogMap.visible(hovered):
-#		self.selected = hovered
 
-	if event.is_action_pressed("ui_left_click") and building and FogMap.visible(hovered) and building.can_build(hovered):
-		Hovered.remove_child(building)
+	if Input.is_action_just_released("ui_left_click") and FogMap.visible(hovered):
+		self.selected = hovered
+
+	if event.is_action_pressed("ui_left_click") and building and building.can_build(hovered):
 		building.build()
-		ObjectMap.set_building(hovered, building)
+		ObjectMap.set_building(hovered, building.duplicate())
 		FogMap.seen_circle(hovered, building.fog)
 		FogMap.update()
-		self.building = null
 		
 	if building != null:
-		if building.can_build(hovered) and FogMap.visible(hovered):
+		if building.can_build(hovered):
 			Hovered.modulate = Color(0, 1, 0)
 		else:
 			Hovered.modulate = Color(1, 0, 0)

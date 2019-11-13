@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/buildings/Building.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Objects/campFire.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://objects/buildings/Building.gd\"
+
+onready var Map = Global.Map
+onready var Resources = Global.Resources
+
+func can_build(position):
+	return \\
+		Map.FogMap.visible(position) and \\
+		Map.ObjectMap.get_building(position) == null and \\
+		Map.TerrainMap.get_terrain(position) == Map.TerrainMap.Terrain.Grass and\\
+		Resources.Wood.stored >= 15
+
+func build():
+	Resources.Wood.stored -= 15
+	Resources.Wood.income += 1.5
+	
+func destroy():
+	Resources.Wood.income -= 1.5"
+
+[node name="Building" instance=ExtResource( 1 )]
+script = SubResource( 1 )
+type = "Campfire"
+fog = 3
+texture = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )

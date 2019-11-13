@@ -6,6 +6,7 @@ var buildings = {}
 onready var Map = Global.Map
 
 func set_building(position, building = null):
+	
 	if (buildings.has(position)):
 		buildings[position].queue_free()
 		buildings.erase(position)
